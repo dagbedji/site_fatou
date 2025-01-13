@@ -60,26 +60,9 @@
                         <input type="text" name="title" id="title-1" class="form-control titleid" value="<%= item.title %>" />
                     
                         <label for="description-1" class="form-label">Edit Description:</label>
-<<<<<<< HEAD
                         <input id="content-1" type="text" name="updatedItemTitle" value="Soutien à domicile et assistance pour de l'organisation " autocomplete="off" autofocus="true" />
                     
                         <input id="content-2" type="text" name="updatedItemTitle" value="Soutien à domicile et assistance pour de l'organisation " autocomplete="off" autofocus="true" />
-=======
-                        <% item.moreContent.forEach((content, index) => { %>
-                            <input 
-                                id="content-<%= index%>"
-                                type="text"
-                                name="updatedItemTitle_<%= index%>"
-                                value="<%= content %>"
-                                autocomplete="off"
-                                autofocus="true"
-                            /> <a href="/deleteOffre" class="icon-linkd">
-                                <i class="fa-solid fa-trash"></i>
-                              </a>
-
-
-                        <% }); %>
->>>>>>> test_fatou
                         <input 
                         id="input-image" 
                         type="file"
