@@ -9,7 +9,7 @@ import session from 'express-session';
 const app = express();
 const port = 3000;
 
-// Dummy user for authentication
+// user for authentication
 const user = { username: 'admin', password: 'password123' };
 
 
