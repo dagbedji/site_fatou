@@ -19,10 +19,11 @@
 
 
             <div class="service_grid1">
+                <% offres.forEach(item => { %>
                 <!-- Pencil Button (Always Visible) -->
                  <div class="right_pencil">
                     <button id="edit-1" class="edit" type="button">
-                        <img class="icon" src="assets/icons/pencil-solid.svg" alt="pencil image">
+                        <img class="icon" src="<%= item.image %>" alt="pencil image">
                     </button>
                  </div>
              
@@ -41,6 +42,8 @@
                              </p>
                          </div>
                          <span class="toggle-btn">Plus</span>
+
+
                 <!-- Form (Hidden by Default) -->
                 <form action="/editServices" method="POST" enctype="multipart/form-data" id="edit-form-1">
                     <!-- Check Button -->
@@ -71,77 +74,13 @@
                     <!-- Hidden Original Content -->
             
                 </form>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+            
             
    
-
-
-
-            </div>
-            
-            
-            
-            
-            <div class="service_grid1">
-                <img src="/assets/image/13.jpg" alt="aide a domicile">
-                <h3>Garderie et école :</h3>
-                <div class="more-content">
-                    <p>
-                        <span>Soutien à l'intégration</span>
-                        <span>Soutien pédagogique et aide à la planification éducative</span>
-                        <span>Séances de conseil, d'écoute et de répit</span>
-                        <span>Organisation d'ateliers, formations et suivi des formations</span>
-                        <span>Stimulations précoces</span>
-                        <span>Stimulation du langage</span>
-                        <span>Mise en place d'outils</span>
-                    </p>
-                </div>
-                <span class="toggle-btn">Plus</span>
-            </div>
-
-            <div class="service_grid1">
-                <img src="/assets/image/13.jpg" alt="aide a domicile">
-                <h3>Famille/ étudiants :</h3>
-                <div class="more-content">
-                    <p>
-                        <span>Soutien à l'intégration sociale et scolaire</span>
-                        <span>Accompagnement dans la gestion de la routine</span>
-                        <span>Séances de conseil, d'écoute et de répit</span>
-                        <span>Préparation à l'accueil d'un nouveau membre (grossesse, naissance, postpartum)</span>
-                        <span>Soutien pour concilier travail et vie familiale</span>
-                        <span>Suivi personnalisé</span>
-                        <span>Création d'un réseau de soutien</span>
-                        <span>Référencement vers les organismes appropriées</span>
-                    </p>
-                </div>
-                <span class="toggle-btn">Plus</span>
-            </div>
-
-            <div class="service_grid1">
-                <img src="/assets/image/initial-travailleur-immigre.jpg" alt="aide a domicile">
-                <h3>Travailleur, Entreprise, Condition Mentale & Physique Particulière :</h3>
-                <div class="more-content">
-                    <p>
-                        <span>Prévention et gestion de la santé mentale au travail</span>
-                        <span>Organisation d'ateliers, formations de groupe avec suivi</span>
-                        <span>Aide à L'intégration, la Réintégration ou retour graduel sur le marché du travail</span>
-                        <span>Accompagnement dans la régularité des suivis professionnels</span>
-                        <span>Soutien pour gérer les obstacles et les changements dans votre vie
-                        professionnelle</span>
-                        <span>Proposition d'adaptations potentielles pour une meilleure ambiance de travail</span>
-                        <span>Soutien suite à un traumatisme ou un incident</span>
-                        <span>Séances de conseil, d'écoute et de répit</span>
-                    </p>
-                </div>
-                <span class="toggle-btn">Plus</span>
-            </div>
-    </div>
-    </div>
-
-
-
-
-
-
     <script type="text/javascript">
         document.querySelectorAll('.toggle-btn').forEach(button => {
             button.addEventListener('click', function() {

@@ -12,8 +12,56 @@ const port = 3000;
 // user for authentication
 const user = { username: 'admin', password: 'password123' };
 
-
-
+const offre = [
+    {
+        title: "Famille/ étudiants :",
+        image: "/assets/image/13.jpg",
+        moreContent: [
+            "Séances de conseil, d'écoute et de répit",
+            "Préparation à l'accueil d'un nouveau membre (grossesse, naissance, postpartum)",
+            "Soutien pour concilier travail et vie familiale",
+            "Suivi personnalisé",
+            "Création d'un réseau de soutien",
+            "Référencement vers les organismes appropriées"
+        ]
+    },
+    {
+        title: "Famille/ étudiants :",
+        image: "/assets/image/13.jpg",
+        moreContent: [
+            "Séances de conseil, d'écoute et de répit",
+            "Préparation à l'accueil d'un nouveau membre (grossesse, naissance, postpartum)",
+            "Soutien pour concilier travail et vie familiale",
+            "Suivi personnalisé",
+            "Création d'un réseau de soutien",
+            "Référencement vers les organismes appropriées"
+        ]
+    },
+    {
+        title: "Famille/ étudiants :",
+        image: "/assets/image/13.jpg",
+        moreContent: [
+            "Séances de conseil, d'écoute et de répit",
+            "Préparation à l'accueil d'un nouveau membre (grossesse, naissance, postpartum)",
+            "Soutien pour concilier travail et vie familiale",
+            "Suivi personnalisé",
+            "Création d'un réseau de soutien",
+            "Référencement vers les organismes appropriées"
+        ]
+    },
+    {
+        title: "Famille/ étudiants :",
+        image: "/assets/image/13.jpg",
+        moreContent: [
+            "Séances de conseil, d'écoute et de répit",
+            "Préparation à l'accueil d'un nouveau membre (grossesse, naissance, postpartum)",
+            "Soutien pour concilier travail et vie familiale",
+            "Suivi personnalisé",
+            "Création d'un réseau de soutien",
+            "Référencement vers les organismes appropriées"
+        ]
+    },
+];
 
 const db = new pg.Client({
     user: "postgres",
@@ -84,12 +132,14 @@ app.get("/", async(req, res) => {
     const missionResult = await db.query("SELECT * FROM mission ORDER BY id ASC");
     const service = await db.query("SELECT * FROM service_data");
     const principe = await db.query("SELECT principe.id, title, text, image FROM principe JOIN session ON session.id = session_id ORDER BY id ASC");
-    try{ 
+    try{
+        const offres = offre
         const services = service.rows[0];
         const missions = missionResult.rows;
         const principes = principe.rows;
         console.log(principes)
         res.render("index.ejs", {
+            offres : offres || [],
             services: services || [],
             missions: missions || [],
             principes: principes || [],
