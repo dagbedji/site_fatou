@@ -23,29 +23,26 @@
                 <!-- Pencil Button (Always Visible) -->
                  <div class="right_pencil">
                     <button id="edit-1" class="edit" type="button">
-                        <img class="icon" src="<%= item.image %>" alt="pencil image">
+                        <img class="icon" src="assets/icons/pencil-solid.svg" alt="pencil image">
                     </button>
                  </div>
              
                          <!-- Visible Content -->
-                         <img src="/assets/image/13.jpg" alt="aide a domicile">
-                         <h3 id="Itemtitle-1">Garderie et école :</h3>
+                         <img src="<%= item.image %>" alt="aide a domicile">
+                         <h3 id="Itemtitle-1"><%= item.title %></h3>
                          <div class="more-content">
                              <p>
-                                 <span>Soutien à l'intégration</span>
-                                 <span>Soutien pédagogique et aide à la planification éducative</span>
-                                 <span>Séances de conseil, d'écoute et de répit</span>
-                                 <span>Organisation d'ateliers, formations et suivi des formations</span>
-                                 <span>Stimulations précoces</span>
-                                 <span>Stimulation du langage</span>
-                                 <span>Mise en place d'outils</span>
+                                <% item.moreContent.forEach(content => { %>
+                                    <span><%= content %></span>
+                                <% }); %>
                              </p>
+                            
                          </div>
                          <span class="toggle-btn">Plus</span>
 
 
                 <!-- Form (Hidden by Default) -->
-                <form action="/editServices" method="POST" enctype="multipart/form-data" id="edit-form-1">
+                <form action="/editOffres" method="POST" enctype="multipart/form-data" id="edit-form-1">
                     <!-- Check Button -->
                     <div class="right_check">
                         <input type="hidden" name="updatedItemId" value="1" >
@@ -57,12 +54,20 @@
                       <!-- Editable Title Input -->
                       <div class="editService" style="display:none;">
                         <label for="title-1" class="form-label">Edit Title:</label>
-                        <input type="text" name="title" id="title-1" class="form-control titleid" value="Ainés et Aidant familial:" />
+                        <input type="text" name="title" id="title-1" class="form-control titleid" value="<%= item.title %>" />
                     
                         <label for="description-1" class="form-label">Edit Description:</label>
-                        <input id="content-1" type="text" name="updatedItemTitle" value="Soutien à domicile et assistance pour de l'organisation " autocomplete="off" autofocus="true" />
-                    
-                        <input id="content-2" type="text" name="updatedItemTitle" value="Soutien à domicile et assistance pour de l'organisation " autocomplete="off" autofocus="true" />
+                        <% item.moreContent.forEach((content, index) => { %>
+                            <input 
+                                id="content-<%= index%>"
+                                type="text"
+                                name="updatedItemTitle_<%= index%>"
+                                value="<%= content %>"
+                                autocomplete="off"
+                                autofocus="true"
+                            />
+                        <% }); %>
+                        
                         <input 
                         id="input-image" 
                         type="file"
@@ -99,8 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const toggleButton = document.querySelector(".toggle-btn");
     editButtons.forEach(element => {
         element.addEventListener("click", (event) => {
-            event.preventDefault();  // Prevent form submission
-              // Hide the toggle button when the pencil is clicked
+            
     
               if (toggleButton) {
                 toggleButton.style.display = "none";
