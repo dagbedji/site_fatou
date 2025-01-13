@@ -42,7 +42,7 @@
 
 
                 <!-- Form (Hidden by Default) -->
-                <form action="/editServices" method="POST" enctype="multipart/form-data" id="edit-form-1">
+                <form action="/editOffres" method="POST" enctype="multipart/form-data" id="edit-form-1">
                     <!-- Check Button -->
                     <div class="right_check">
                         <input type="hidden" name="updatedItemId" value="1" >
@@ -57,17 +57,9 @@
                         <input type="text" name="title" id="title-1" class="form-control titleid" value="<%= item.title %>" />
                     
                         <label for="description-1" class="form-label">Edit Description:</label>
-                        <% item.moreContent.forEach((content, index) => { %>
-                            <input 
-                                id="content-<%= index + 1 %>"
-                                type="text"
-                                name="updatedItemTitle_<%= index + 1 %>"
-                                value="<%= content %>"
-                                autocomplete="off"
-                                autofocus="true"
-                            />
-                        <% }); %>
-                        
+                        <input id="content-1" type="text" name="updatedItemTitle" value="Soutien à domicile et assistance pour de l'organisation " autocomplete="off" autofocus="true" />
+                    
+                        <input id="content-2" type="text" name="updatedItemTitle" value="Soutien à domicile et assistance pour de l'organisation " autocomplete="off" autofocus="true" />
                         <input 
                         id="input-image" 
                         type="file"
@@ -104,8 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const toggleButton = document.querySelector(".toggle-btn");
     editButtons.forEach(element => {
         element.addEventListener("click", (event) => {
-            event.preventDefault();  // Prevent form submission
-              // Hide the toggle button when the pencil is clicked
+            
     
               if (toggleButton) {
                 toggleButton.style.display = "none";
