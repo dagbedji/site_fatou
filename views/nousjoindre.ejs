@@ -1,0 +1,88 @@
+<%- include("partials/header.ejs") %>
+<!--first navbar-->
+
+<div class="header">
+  <h1 class="colored-text">Nous joindre</span></h1>
+</div>
+
+  <div class="role">
+    <div class="role_flexe">
+      <h3>Notre équipe est là pour vous. Remplissez le formulaire suivant :</h2>
+    </div>
+  </div>
+  <div class="box">
+    <!-- Form Section #18b7ff; -->
+    <div class="contacte form">
+        <h3>Envoyer un message</h3>
+        <form>
+            <div class="formBox">
+                <div class="row50">
+                    <div class="inputBox">
+                        <span>Nom complet</span>
+                        <input type="text" placeholder="John">
+                    </div>
+                    <div class="inputBox">
+                        <span>Entreprise</span> <!-- Changed to Last Name -->
+                        <input type="text" placeholder="Doe">
+                    </div>
+                </div>
+                <div class="row50">
+                    <div class="inputBox">
+                        <span>Courriel</span>
+                        <input type="text" placeholder="Johndoe@gmail.com">
+                    </div>
+                    <div class="inputBox">
+                        <span>Téléphone</span> <!-- Changed to Phone -->
+                        <input type="text" placeholder="4182400005">
+                    </div>
+                </div>
+                <div class="row100">
+                    <div class="inputBox">
+                        <span>Message</span>
+                        <textarea placeholder="Write your message here..."></textarea>
+                    </div>
+                </div>
+                <div class="row100">
+                    <div class="inputBox">
+                        <input type="submit" value="Soumettre">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Info Box Section   #80bcb9-->
+    <div class="contacte info">
+        <h3>Nos coordonnées</h3>
+        <div class="infobox">
+            <div>
+                <span><ion-icon name="location"></ion-icon></span> 310 rue de Murano Local 204, Sainte Julie, QC, J3E 0C6
+            </div>
+            <div>
+                <span><ion-icon name="mail"></ion-icon></span>
+                <a href="mailto:lmailtome@email.com"> info@ases-pro.com</a>
+            </div>
+            <div>
+                <span><ion-icon name="call"></ion-icon></span>
+                <a href="tel:(418)000-0000"> (514) 225-1895</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Map Section -->
+    <div class="contacte maps">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2792.3253484522875!2d-73.3208807!3d45.584004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cc90134498d49cf%3A0xb9c56a2145dad136!2s310%20Rue%20Murano%2C%20Sainte-Julie%2C%20QC%20J3E%200C6!5e0!3m2!1sen!2sca!4v1724037570408!5m2!1sen!2sca" 
+        width="600" 
+        height="450" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <!-- Add your map embed code or content here -->
+    </div> 
+</div>  
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  
+<!-- /footer -->
+<%- include("partials/footer.ejs") %>

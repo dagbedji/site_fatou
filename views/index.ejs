@@ -1,0 +1,339 @@
+<%- include("partials/header.ejs") %>
+<!-- End Acceuil navbar and Hamburger Menu -->
+
+
+<!-- image -->
+<div class="image-container" style="display: flex; justify-content: center; align-items: center; flex-direction: column; position: relative;">
+  <img src="/assets/image/2 ch.jpg" alt="backimage">
+  <div class="text" style="position: absolute;">
+      Bien-être et épanouissement: <br> Votre équilibre, notre engagement!
+  </div>
+  <div class="button-container" style="position: absolute; top: 60%; left: 60%; transform: translate(-50%, -50%);">
+      <a href="mailto:info@ases-pro.com" class="contact-button custom-contact-button" style="padding: 10px 20px; background-color: #3C9D9B; color: white; text-decoration: none; border-radius: 5px;">Contactez-nous</a>
+  </div>
+</div>
+
+<!-- end image -->
+
+
+<!-- end container image -->
+
+<div class="container marketing">
+
+  <div class="row">
+    <% missions.forEach(mission => { %>
+      <div class="col-lg-4 d-flex flex-column align-items-center text-center mb-4">
+        
+        <img
+          id="image<%= mission.id %>"
+          class="bd-placeholder-img rounded-circle" 
+          width="140" 
+          height="140" 
+          src="<%= mission.image %>" 
+        >
+        <h2 class="fw-normal mt-3" id="title<%= mission.id %>"><%= mission.title %></h2>
+        <p id="description<%= mission.id %>"><%= mission.description %></p>
+        
+        <script>
+          console.log('<%= JSON.stringify(mission) %>');
+        </script>
+  
+        <!-- Editable form that is hidden initially -->
+        <form class="edit" action="/editMission" method="post" enctype="multipart/form-data" hidden>
+          <input type="hidden" name="updatedItemId" value="<%= mission.id %>">
+  
+          <!-- Editable Title Input -->
+          <input 
+            id="input-title<%= mission.id %>" 
+            type="text" 
+            name="updatedItemTitle" 
+            value="<%= mission.title %>"
+            class="form-control mb-2"
+            autocomplete="off"  
+          />
+  
+          <!-- Editable Description Input -->
+          <textarea 
+            id="input-description<%= mission.id %>" 
+            name="updatedItemDescription" 
+            class="form-control mb-2"
+            rows="5"
+            style="width: 100%;" 
+          ><%= mission.description %></textarea>
+  
+          <!-- Editable Image Input -->
+          <input 
+            id="input-image<%= mission.id %>" 
+            type="file"
+            name="image" 
+            class="form-control mb-3"
+            accept="image/*" 
+          />
+  
+          <% if (user) { %>
+            <!-- Save button for the form -->
+            <button type="submit" class="btn btn-success">Sauvegarder</button>
+          <% } %>
+        </form>
+          
+        <% if (user) { %>
+          <!-- Edit button to show form -->
+          <button type="button" 
+            class="btn btn-success" 
+            id="edited<%= mission.id %>"
+            onclick="showEdit('<%= mission.id %>')"
+          >Modifier</button>
+        <% } %>
+  
+      </div><!-- /.col-lg-4 -->
+    <% }); %>
+  </div>
+  
+
+  <div class="row featurette mt-5">
+    <form action="/editPrincipes" method="POST">
+        <div class="row featurette mb-0 mt-3">
+            <!-- Text Content Section -->
+            <div class="col-md-7 order-md-1">
+                <h2 class="featurette-heading fw-normal lh-1 mt-3">
+                    Quels sont nos <span class="text-body-secondary">Principes :</span>
+                </h2>
+                <p class="lead">
+                    <% principes.forEach((principe, index) => { %>
+                        <!-- Principe title and text (visible by default) -->
+                        <div class="lead" id="text-<%= index %>">
+                            <span class="text-success fw-bold"><%= principe.title %></span> <%= principe.text %> <br>
+                        </div>
+
+                        <!-- Editable Version (Hidden by default) -->
+                        <div class="principe-edit" id="editor-<%= index %>" style="display: none;"> <!-- id editor0 quand on change le premier element-->
+                            <div class="mb-3">
+                                <label for="title-<%= index %>" class="form-label">Title</label> <!--  title-0 quand on change le premier element-->
+                                <!-- Regular input field for title -->
+                                <input type="text" name="titles[<%= index %>]" id="title-<%= index %>" class="form-control titleid" value="<%= principe.title %>" />
+                                <input type="hidden" id="original-text-<%= index %>" value="<%=principe.title %>">
+                            </div>
+                            <div class="mb-3">
+                                <label for="text-<%= index %>" class="form-label">Text</label>
+                                <!-- Regular textarea for text -->
+                                <textarea name="texts[<%= index %>]" id="text-<%= index %>" class="form-control textid" rows="6"><%= principe.text %></textarea>
+                                <input type="hidden" id="originale-text-<%= index %>" value="<%=principe.text %>">
+                            </div>
+                            <input type="hidden" name="changes[<%= index %>]" id="changes-<%= index %>" value="" >
+
+                            <div class="mb-3 mt-3">
+                              <input 
+                                  id="Principe-image" 
+                                  type="file" 
+                                  name="image" 
+                                  class="form-control"
+                                  style="max-width: 600px;"  
+                                  accept="image/*"
+                              />
+                          </div>
+                            
+                        </div>
+            
+                    <% }); %>
+                </p>
+            </div>
+
+            <!-- Image Section -->
+            <div class="col-md-5 order-md-2">
+                <img src="<%= principes[0].image%>" class="img-fluid mx-auto d-block" width="400" height="400" alt="Your Image">
+            </div>
+        </div>
+        
+
+
+        <div class="d-flex justify-content-between align-items-center">
+          <% if (user) { %>
+            <button type="button" class="btn btn-success" id="edit-btn">Edit</button>
+            <button type="submit" class="btn btn-success" id="save-btn" style="display: none;">Save Changes</button>
+                <!-- Single File Input -->
+            <% } %>
+        </div>
+
+
+    </form>
+</div>
+
+<script>
+  document.getElementById("save-btn").addEventListener("click", function () {
+    console.log("Save button clicked!");
+
+    // Get all title and text inputs
+    const titles = document.querySelectorAll(".titleid"); // Select all elements with the class "titleid"
+    const texts = document.querySelectorAll(".textid");  // Select all elements with the class "textid"
+
+    // Log the NodeLists for debugging
+    console.log("Titles:", titles);
+    console.log("Texts:", texts);
+    titles.forEach((title) => {
+      const index = title.id.split("-")[1]; // Extract index from ID
+      console.log("index:", index);
+      const Originaltitle = document.getElementById(`original-text-${index}`).value;
+      const titleChange = document.getElementById(`changes-${index}`);
+      if (title.value !== Originaltitle) {
+        titleChange.value += `title,`;
+      }
+    })
+
+    texts.forEach((text) => {
+      const index = text.id.split("-")[1]; // Extract index from ID
+      console.log("indextext:", index);
+      const Originaltext = document.getElementById(`originale-text-${index}`).value;
+      const textChange = document.getElementById(`changes-${index}`);
+      if (text.value !== Originaltext) {
+        textChange.value += `text,`;
+      }
+    })
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<hr class="featurette-divider mt-5">
+
+ <!-- Service Form -->
+
+<div class="row featurette mt-3 mb-3 position-relative">
+  <!-- Container to align both div and form -->
+  <div class="col-md-7 order-md-1">
+    <div class="toggle-container position-relative">
+      <!-- Service Display -->
+      <div class="service-display" id="servicesDisplay"style="white-space: pre-line;">
+        <h2 class="featurette-heading fw-normal lh-1 mt-1" id="servicesTitle"><%= services.title %></h2>
+        <p class="lead" id="servicesDescription"><%= services.description %></p>
+      </div>
+
+      <!-- Editable Form -->
+      <form 
+        class="edit service-edit" 
+        action="/editServices" 
+        method="post" 
+        enctype="multipart/form-data"
+        id="servicesEditForm"
+        hidden
+      >
+        <input 
+          id="input-title<%= services.id %>" 
+          type="text" 
+          name="updatedItemTitle" 
+          value="<%= services.title %>"
+          class="form-control mb-2"
+          style="width: 100%;" 
+          autocomplete="off"  
+        />
+        <textarea 
+          id="input-description<%= services.id %>" 
+          name="updatedItemDescription" 
+          class="form-control mb-2"
+          rows="5"
+          style="width: 100%;" 
+        ><%= services.description%></textarea>
+        <input 
+          id="input-image<%= services.id %>" 
+          type="file"
+          name="image" 
+          class="form-control mb-3"
+          accept="image/*" 
+          style="width: 100%"
+        />
+        <% if (user) { %>
+        <button type="submit" class="btn btn-success">Save</button>
+        <% } %>
+      </form>
+    </div>
+  </div>
+
+  <div class="col-md-5 order-md-2">
+    <img src="<%= services.image %>" class="img-fluid mx-auto d-block" width="400" height="400" alt="Your Image">
+  </div>
+</div>
+
+<!-- Edit Button -->
+<% if (user) { %>
+<div class="d-flex justify-content-start align-items-center mb-3">
+  <button type="button" 
+    class="btn btn-success" 
+    onclick="servicesEdit()"
+    id="edit-button">Edit
+  </button>
+</div>
+<% } %>
+</div>
+
+  
+
+  <div class="no-bootstrap">
+    <div class="firstcontainer">
+  
+      <div class="container swiper">
+          <div class="card-wrapper">
+              <ul class="card-list swiper-wrapper">
+                  <li class="card-item swiper-slide">
+                      <a href="./services.html" class="card-link">
+                          <img src="/assets/image/img-famille-enfant-grossesse-parents-1020x680.jpg" alt="Card Image" 
+                          class="card-image">
+                          <p class="badge">Services</p>
+                          <h2 class="card-title">Une équipe pour répondre à vos besoins.</h2>
+                          <button class="card-button material-symbols-outlined">arrow_forward</button>
+                      </a>
+                      
+                  </li>
+                  <li class="card-item swiper-slide">
+                      <a href="./tarification.html" class="card-link">
+                          <img src="/assets/image/economie.jpg" alt="Card Image" 
+                          class="card-image">
+                          <p class="badge marketer">Tarification</p>
+                          <h2 class="card-title">Des prix abordables pour tous !</h2>
+                          <button class="card-button material-symbols-outlined">arrow_forward</button>
+                      </a>
+                      
+                  </li>
+                  <li class="card-item swiper-slide">
+                      <a href="./ressource.html" class="card-link">
+                          <img src="/assets/image/Limportance-pour-nos-petits-de-jouer-avec-dautres-enfants.png" alt="Card Image" 
+                          class="card-image">
+                          <p class="badge gamer">Ressources</p>
+                          <h2 class="card-title">Explorez nos articles pour en apprendre davantages.</h2>
+                          <button class="card-button material-symbols-outlined">arrow_forward</button>
+                      </a>
+                      
+                  </li>
+                  <li class="card-item swiper-slide">
+                      <a href="./nousjoindre.html" class="card-link">
+                          <img src="/assets/image/telephone-mobile-pour-aine.jpg" alt="Card Image" 
+                          class="card-image">
+                          <p class="badge editor">Contacter</p>
+                          <h2 class="card-title">Veuillez nous contacter pour en savoir plus</h2>
+                          <button class="card-button material-symbols-outlined">arrow_forward</button>
+                      </a>
+                      
+                  </li>
+              </ul>
+              <div class="swiper-pagination"></div>
+              <div class="swiper-slide-button swiper-button-prev"></div>
+              <div class="swiper-slide-button swiper-button-next"></div>
+          </div>
+      </div>    
+  
+  </div>
+  
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="/styles/script.js"></script>
+  
+  <!-- /footer -->
+
+
+  <%- include("partials/footer.ejs") %>

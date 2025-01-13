@@ -1,0 +1,295 @@
+<%- include("partials/header.ejs") %>
+  <!-- End Acceuil navbar and Hamburger Menu -->
+
+
+
+
+    <!-- Script to trigger background color change -->
+
+
+    <div class="header">
+        <h1 class="colored-text">Services</span></h1>
+        <p class="main-description">Voici les services que nous offrons</p>
+    </div>
+
+    <div class="Service">
+
+
+        <div class="service_grid">
+
+
+            <div class="service_grid1">
+                <!-- Pencil Button (Always Visible) -->
+                 <div class="right_pencil">
+                    <button id="edit-1" class="edit" type="button">
+                        <img class="icon" src="assets/icons/pencil-solid.svg" alt="pencil image">
+                    </button>
+                 </div>
+             
+                         <!-- Visible Content -->
+                         <img src="/assets/image/13.jpg" alt="aide a domicile">
+                         <h3 id="Itemtitle-1">Garderie et école :</h3>
+                         <div class="more-content">
+                             <p>
+                                 <span>Soutien à l'intégration</span>
+                                 <span>Soutien pédagogique et aide à la planification éducative</span>
+                                 <span>Séances de conseil, d'écoute et de répit</span>
+                                 <span>Organisation d'ateliers, formations et suivi des formations</span>
+                                 <span>Stimulations précoces</span>
+                                 <span>Stimulation du langage</span>
+                                 <span>Mise en place d'outils</span>
+                             </p>
+                         </div>
+                         <span class="toggle-btn">Plus</span>
+                <!-- Form (Hidden by Default) -->
+                <form action="/editServices" method="POST" enctype="multipart/form-data" id="edit-form-1">
+                    <!-- Check Button -->
+                    <div class="right_check">
+                        <input type="hidden" name="updatedItemId" value="1" >
+                        <button id="done-1" class="edit" type="submit" hidden>
+                            <img class="icon" src="assets/icons/check-solid.svg" alt="check image" >
+                        </button>
+                    </div>
+    
+                      <!-- Editable Title Input -->
+                      <div class="editService" style="display:none;">
+                        <label for="title-1" class="form-label">Edit Title:</label>
+                        <input type="text" name="title" id="title-1" class="form-control titleid" value="Ainés et Aidant familial:" />
+                    
+                        <label for="description-1" class="form-label">Edit Description:</label>
+                        <input id="content-1" type="text" name="updatedItemTitle" value="Soutien à domicile et assistance pour de l'organisation " autocomplete="off" autofocus="true" />
+                    
+                        <input id="content-2" type="text" name="updatedItemTitle" value="Soutien à domicile et assistance pour de l'organisation " autocomplete="off" autofocus="true" />
+                        <input 
+                        id="input-image" 
+                        type="file"
+                        name="image" 
+                        class="form-control mb-3"
+                        accept="image/*" >
+                    </div>
+        
+                    <!-- Hidden Original Content -->
+            
+                </form>
+            
+   
+
+
+
+            </div>
+            
+            
+            
+            
+            <div class="service_grid1">
+                <img src="/assets/image/13.jpg" alt="aide a domicile">
+                <h3>Garderie et école :</h3>
+                <div class="more-content">
+                    <p>
+                        <span>Soutien à l'intégration</span>
+                        <span>Soutien pédagogique et aide à la planification éducative</span>
+                        <span>Séances de conseil, d'écoute et de répit</span>
+                        <span>Organisation d'ateliers, formations et suivi des formations</span>
+                        <span>Stimulations précoces</span>
+                        <span>Stimulation du langage</span>
+                        <span>Mise en place d'outils</span>
+                    </p>
+                </div>
+                <span class="toggle-btn">Plus</span>
+            </div>
+
+            <div class="service_grid1">
+                <img src="/assets/image/13.jpg" alt="aide a domicile">
+                <h3>Famille/ étudiants :</h3>
+                <div class="more-content">
+                    <p>
+                        <span>Soutien à l'intégration sociale et scolaire</span>
+                        <span>Accompagnement dans la gestion de la routine</span>
+                        <span>Séances de conseil, d'écoute et de répit</span>
+                        <span>Préparation à l'accueil d'un nouveau membre (grossesse, naissance, postpartum)</span>
+                        <span>Soutien pour concilier travail et vie familiale</span>
+                        <span>Suivi personnalisé</span>
+                        <span>Création d'un réseau de soutien</span>
+                        <span>Référencement vers les organismes appropriées</span>
+                    </p>
+                </div>
+                <span class="toggle-btn">Plus</span>
+            </div>
+
+            <div class="service_grid1">
+                <img src="/assets/image/initial-travailleur-immigre.jpg" alt="aide a domicile">
+                <h3>Travailleur, Entreprise, Condition Mentale & Physique Particulière :</h3>
+                <div class="more-content">
+                    <p>
+                        <span>Prévention et gestion de la santé mentale au travail</span>
+                        <span>Organisation d'ateliers, formations de groupe avec suivi</span>
+                        <span>Aide à L'intégration, la Réintégration ou retour graduel sur le marché du travail</span>
+                        <span>Accompagnement dans la régularité des suivis professionnels</span>
+                        <span>Soutien pour gérer les obstacles et les changements dans votre vie
+                        professionnelle</span>
+                        <span>Proposition d'adaptations potentielles pour une meilleure ambiance de travail</span>
+                        <span>Soutien suite à un traumatisme ou un incident</span>
+                        <span>Séances de conseil, d'écoute et de répit</span>
+                    </p>
+                </div>
+                <span class="toggle-btn">Plus</span>
+            </div>
+    </div>
+    </div>
+
+
+
+
+
+
+    <script type="text/javascript">
+        document.querySelectorAll('.toggle-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const moreContent = this.previousElementSibling;
+                moreContent.classList.toggle('active');
+                this.textContent = moreContent.classList.contains('active') ? 'Moins' : 'Plus';
+            });
+        });
+    </script>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const editButtons = document.querySelectorAll(".edit");
+    const toggleButton = document.querySelector(".toggle-btn");
+    editButtons.forEach(element => {
+        element.addEventListener("click", (event) => {
+            event.preventDefault();  // Prevent form submission
+              // Hide the toggle button when the pencil is clicked
+    
+              if (toggleButton) {
+                toggleButton.style.display = "none";
+            }
+            const editButton = event.target.closest('button'); // Target the clicked button element
+            const moreContent = document.querySelector(".more-content");
+            const title = document.getElementById("Itemtitle-1");
+            const editInput = document.querySelector(".editService");
+            const doneButton = document.getElementById("done-1");
+            
+
+            // Hide content, title and pencil when the pencil button is clicked
+            if (editButton.id === "edit-1") {
+                moreContent.style.display = "none";  // Hide the content
+                title.style.display = "none";  // Hide the title
+                editButton.style.display = "none";  // Hide the pencil button
+                
+                // Show the editable input fields and the done button
+                editInput.style.display = "block"; // Show the input for editing
+                doneButton.removeAttribute("hidden"); // Show the done button
+            }
+        });
+    });
+
+    // Event listener for the done button
+    const doneButton = document.getElementById("done-1");
+    doneButton.addEventListener("click", (event) => {
+        //event.preventDefault();  // Prevent form submission
+
+
+        // Show the content, title, and pencil button when done button is clicked
+        const moreContent = document.querySelector(".more-content");
+        const title = document.getElementById("Itemtitle-1");
+        const editInput = document.querySelector(".editService");
+        const editButton = document.getElementById("edit-1");
+        
+        moreContent.style.display = "block";  // Show the content again
+        title.style.display = "block";  // Show the title again
+        editButton.style.display = "block";  // Show the pencil button again
+        
+        // Hide the editable input fields and the done button
+        editInput.style.display = "none";  // Hide the input form
+        doneButton.setAttribute("hidden", "true");  // Hide the done button again
+    });
+});
+
+
+</script>
+
+
+<div class="booking">
+  <h3>Veuillez nous laissez vos informations</h3>
+  
+
+  <div class="box">
+    <!-- Form Section #18b7ff; -->
+    <div class="contacte form">
+        <h3>Envoyer un message</h3>
+        <form>
+            <div class="formBox">
+                <div class="row50">
+                    <div class="inputBox">
+                        <span>Nom Complet</span>
+                        <input type="text" placeholder="John">
+                    </div>
+                    <div class="inputBox">
+                        <span>Entreprise</span> <!-- Changed to Last Name -->
+                        <input type="text" placeholder="Doe">
+                    </div>
+                </div>
+                <div class="row50">
+                    <div class="inputBox">
+                        <span>Courriel</span>
+                        <input type="text" placeholder="Johndoe@gmail.com">
+                    </div>
+                    <div class="inputBox">
+                        <span>Téléphone</span> <!-- Changed to Phone -->
+                        <input type="text" placeholder="4182400005">
+                    </div>
+                </div>
+                <div class="row100">
+                    <div class="inputBox">
+                        <span>Message</span>
+                        <textarea placeholder="Write your message here..."></textarea>
+                    </div>
+                </div>
+                <div class="row100">
+                    <div class="inputBox">
+                        <input type="submit" value="Soumettre">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="contacte info">
+      <h3>Coordonnées</h3>
+      <div class="infobox">
+          <div>
+              <span><ion-icon name="location"></ion-icon></span> 310, rue de Murano Local 204, Sainte Julie, QC, J3E 0C6
+          </div>
+          <div>
+              <span><ion-icon name="mail"></ion-icon></span>
+              <a href="mailto:lmailtome@email.com"> info@ases-pro.com</a>
+          </div>
+          <div>
+              <span><ion-icon name="call"></ion-icon></span>
+              <a href="tel:(418)000-0000"> (514) 225-1895</a>
+          </div>
+      </div>
+  </div>
+
+     <!-- Map Section -->
+     <div class="contacte maps">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2792.3253484522875!2d-73.3208807!3d45.584004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cc90134498d49cf%3A0xb9c56a2145dad136!2s310%20Rue%20Murano%2C%20Sainte-Julie%2C%20QC%20J3E%200C6!5e0!3m2!1sen!2sca!4v1724037570408!5m2!1sen!2sca" 
+      width="600" 
+      height="450" 
+      style="border:0;" 
+      allowfullscreen="" 
+      loading="lazy" 
+      referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <!-- Add your map embed code or content here -->
+  </div> 
+</div>  
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</div>
+
+<!-- /footer -->
+<%- include("partials/footer.ejs") %>
+
+
