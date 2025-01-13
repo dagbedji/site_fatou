@@ -32,7 +32,7 @@
                          <h3 id="Itemtitle-<%= item.id %>"><%= item.title %></h3>
                          <div class="more-content">
                              <p>
-                                <% item.moreContent.forEach(content => { %>
+                                <% item.contents.forEach(content => { %>
                                     <span><%= content %></span>
                                 <% }); %>
                              </p>
@@ -60,7 +60,7 @@
                         <input type="text" name="title" id="title-1" class="form-control titleid" value="<%= item.title %>" />
                     
                         <label for="description-1" class="form-label">Edit Description:</label>
-                        <% item.moreContent.forEach((content, index) => { %>
+                        <% item.contents.forEach((content, index) => { %>
                             <input 
                                 id="content-<%= index%>"
                                 type="text"

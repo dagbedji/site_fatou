@@ -113,7 +113,7 @@ INSERT INTO moreContent (offre_id, content) VALUES
 (1, 'Soutien pour concilier travail et vie familiale'),
 (1, 'Suivi personnalisé'),
 (1, 'Création d''un réseau de soutien'),
-(1, 'Référencement vers les organismes appropriées');
+(1, 'Référencement vers les organismes appropriées'),
 
 INSERT INTO moreContent (offre_id, content) VALUES
 (2, 'Séances de conseil, d''écoute et de répit'),

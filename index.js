@@ -83,9 +83,9 @@ app.get("/", async(req, res) => {
     const missionResult = await db.query("SELECT * FROM mission ORDER BY id ASC");
     const service = await db.query("SELECT * FROM service_data");
     const principe = await db.query("SELECT principe.id, title, text, image FROM principe JOIN session ON session.id = session_id ORDER BY id ASC");
-    const offre = await db.query("SELECT offre.id, offre.title, offre.image FROM offre JOIN moreContent ON offre.id = offre_id");
+   
+    
     //const content = await db.query("SELECT * FROM moreContent");
-    console.log("offre:",offre.rows)
     try{
         const services = service.rows[0];
         const missions = missionResult.rows;
@@ -104,9 +104,32 @@ app.get("/", async(req, res) => {
     
 });
 
-app.get("/services", (req, res) =>{
+app.get("/services", async (req, res) =>{
+    const result = await db.query(`
+        SELECT 
+            offre.id, 
+            offre.title, 
+            offre.image, 
+            STRING_AGG(moreContent.content, '. ') AS contents
+        FROM 
+            offre
+        LEFT JOIN 
+            moreContent
+        ON 
+            offre.id = moreContent.offre_id
+        GROUP BY 
+            offre.id, offre.title, offre.image
+    `);
+    
+    const offres = result.rows.map(row => ({
+        ...row,
+        contents: row.contents ? row.contents.split('. ') : [], // Split using the unique delimiter
+    }));
+    
+    
+    console.log("offre", offres);
     res.render("services.ejs", {
-        offres: offre,
+        offres: offres,
     });
 });
 
