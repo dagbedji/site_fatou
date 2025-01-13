@@ -16,23 +16,23 @@
 
 
         <div class="service_grid">
-
-
+            <% offres.forEach(item => { %>
             <div class="service_grid1">
-                <% offres.forEach(item => { %>
+                
                 <!-- Pencil Button (Always Visible) -->
                  <div class="right_pencil">
                     <button id="edit-1" class="edit" type="button">
                         <img class="icon" src="assets/icons/pencil-solid.svg" alt="pencil image">
                     </button>
-                 </div>
+                 </div id = "item-<%= item.id %>">
              
                          <!-- Visible Content -->
                          <img src="<%= item.image %>" alt="aide a domicile">
-                         <h3 id="Itemtitle-1"><%= item.title %></h3>
+                         
+                         <h3 id="Itemtitle-<%= item.id %>"><%= item.title %></h3>
                          <div class="more-content">
                              <p>
-                                <% item.moreContent.forEach(content => { %>
+                                <% item.contents.forEach(content => { %>
                                     <span><%= content %></span>
                                 <% }); %>
                              </p>
@@ -60,7 +60,7 @@
                         <input type="text" name="title" id="title-1" class="form-control titleid" value="<%= item.title %>" />
                     
                         <label for="description-1" class="form-label">Edit Description:</label>
-                        <% item.moreContent.forEach((content, index) => { %>
+                        <% item.contents.forEach((content, index) => { %>
                             <input 
                                 id="content-<%= index%>"
                                 type="text"
@@ -86,9 +86,16 @@
                     <!-- Hidden Original Content -->
             
                 </form>
-                <% }); %>
+                <a href="/deleteService" class="icon-linkd">
+                    <i class="fa-solid fa-trash"></i>
+                  </a>
             </div>
+            <% }); %>
         </div>
+       
+        <a href="/addOffre" class="plus-linkd" >
+            <i class="fa-solid fa-plus"></i>
+        </a>
     </div>
             
             

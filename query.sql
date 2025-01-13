@@ -1,6 +1,6 @@
 CREATE TABLE missions (
     id SERIAL PRIMARY KEY,
-    image BYTEA,
+    image text,
     title VARCHAR(100) NOT NULL,
     description TEXT NOT NULL
 );
@@ -88,3 +88,37 @@ SELECT principe.id, title, text, image
 FROM principe
 JOIN session
 ON session.id = session_id
+
+
+
+-- Offre data
+CREATE TABLE offre (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(100) NOT NULL,
+    image TEXT NOT NULL
+);
+
+CREATE TABLE moreContent (
+    id SERIAL PRIMARY KEY,
+    offre_id INT NOT NULL REFERENCES offre(id),
+    content TEXT NOT NULL
+);
+
+INSERT INTO offre (title, image) VALUES
+('Famille/ étudiants :', '/assets/image/13.jpg'),
+('Famille/ étudiants :', '/assets/image/13.jpg');
+INSERT INTO moreContent (offre_id, content) VALUES
+(1, 'Séances de conseil, d''écoute et de répit'),
+(1, 'Préparation à l''accueil d''un nouveau membre (grossesse, naissance, postpartum)'),
+(1, 'Soutien pour concilier travail et vie familiale'),
+(1, 'Suivi personnalisé'),
+(1, 'Création d''un réseau de soutien'),
+(1, 'Référencement vers les organismes appropriées'),
+
+INSERT INTO moreContent (offre_id, content) VALUES
+(2, 'Séances de conseil, d''écoute et de répit'),
+(2, 'Préparation à l''accueil d''un nouveau membre (grossesse, naissance, postpartum)'),
+(2, 'Soutien pour concilier travail et vie familiale'),
+(2, 'Suivi personnalisé'),
+(2, 'Création d''un réseau de soutien'),
+(2, 'Référencement vers les organismes appropriées');
