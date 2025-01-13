@@ -12,20 +12,7 @@ const port = 3000;
 // user for authentication
 const user = { username: 'admin', password: 'password123' };
 
-const offre = [
-    {
-        title: "Famille/ étudiants :",
-        image: "/assets/image/13.jpg",
-        moreContent: [
-            "Séances de conseil, d'écoute et de répit",
-            "Préparation à l'accueil d'un nouveau membre (grossesse, naissance, postpartum)",
-            "Soutien pour concilier travail et vie familiale",
-            "Suivi personnalisé",
-            "Création d'un réseau de soutien",
-            "Référencement vers les organismes appropriées"
-        ]
-    },
-];
+
 
 const db = new pg.Client({
     user: "postgres",
@@ -96,11 +83,14 @@ app.get("/", async(req, res) => {
     const missionResult = await db.query("SELECT * FROM mission ORDER BY id ASC");
     const service = await db.query("SELECT * FROM service_data");
     const principe = await db.query("SELECT principe.id, title, text, image FROM principe JOIN session ON session.id = session_id ORDER BY id ASC");
+    const offre = await db.query("SELECT offre.id, offre.title, offre.image FROM offre JOIN moreContent ON offre.id = offre_id");
+    //const content = await db.query("SELECT * FROM moreContent");
+    console.log("offre:",offre.rows)
     try{
         const services = service.rows[0];
         const missions = missionResult.rows;
         const principes = principe.rows;
-        console.log(principes)
+        
         res.render("index.ejs", {
             services: services || [],
             missions: missions || [],
@@ -228,21 +218,18 @@ app.post('/editServices', upload, async (req, res) => {
 app.post('/editPrincipes', upload, async (req, res) => {
     const { titles, texts, changes } = req.body;
 
-    console.log("Titles:", titles); // Object: { "0": "Title 1", "1": "Title 2" }
-    console.log("Texts:", texts);   // Object: { "0": "Text 1", "1": "Text 2" }
-    console.log("Changes:", changes); // Object: { "0": "title,text", "1": "" }
 
     // Loop through changes and handle updates
     for (const index in changes) {
         if (changes[index]) {
-            console.log(`Processing change at index: ${index}, change type: ${changes[index]}`);
+            
             
             const id = parseInt(index) + 1;
-            console.log(`Calculated ID: ${id}`);
+           
             
             const updatedTitle = titles[index];
             const updatedText = texts[index];
-            console.log(`Updated Title: ${updatedTitle}, Updated Text: ${updatedText}`);
+            
             
             // Update database or perform actions here
             try {
