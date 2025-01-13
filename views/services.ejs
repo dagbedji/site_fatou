@@ -50,9 +50,12 @@
                             <img class="icon" src="assets/icons/check-solid.svg" alt="check image" >
                         </button>
                     </div>
-    
+
                       <!-- Editable Title Input -->
                       <div class="editService" style="display:none;">
+                        <a href="/addOffre" class="plus-linkd" >
+                            <i class="fa-solid fa-plus"></i>
+                        </a>
                         <label for="title-1" class="form-label">Edit Title:</label>
                         <input type="text" name="title" id="title-1" class="form-control titleid" value="<%= item.title %>" />
                     
@@ -65,15 +68,19 @@
                                 value="<%= content %>"
                                 autocomplete="off"
                                 autofocus="true"
-                            />
+                            /> <a href="/deleteOffre" class="icon-linkd">
+                                <i class="fa-solid fa-trash"></i>
+                              </a>
+
+
                         <% }); %>
-                        
                         <input 
                         id="input-image" 
                         type="file"
                         name="image" 
                         class="form-control mb-3"
                         accept="image/*" >
+                   
                     </div>
         
                     <!-- Hidden Original Content -->
