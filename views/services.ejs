@@ -21,10 +21,10 @@
                 
                 <!-- Pencil Button (Always Visible) -->
                  <div class="right_pencil">
-                    <button id="edit-1" class="edit" type="button">
+                    <button id="edit-<%= item.id %>" class="edit" type="button">
                         <img class="icon" src="assets/icons/pencil-solid.svg" alt="pencil image">
                     </button>
-                 </div id = "item-<%= item.id %>">
+                 </div>
              
                          <!-- Visible Content -->
                          <img src="<%= item.image %>" alt="aide a domicile">
@@ -45,8 +45,8 @@
                 <form action="/editOffres" method="POST" enctype="multipart/form-data" id="edit-form-1">
                     <!-- Check Button -->
                     <div class="right_check">
-                        <input type="hidden" name="updatedItemId" value="1" >
-                        <button id="done-1" class="edit" type="submit" hidden>
+                        <input type="hidden" name="updatedItemId" value="<%= item.id %>" >
+                        <button id="done-<%= item.id %>" class="edit" type="submit" hidden>
                             <img class="icon" src="assets/icons/check-solid.svg" alt="check image" >
                         </button>
                     </div>
@@ -117,6 +117,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const editButtons = document.querySelectorAll(".edit");
     const toggleButton = document.querySelector(".toggle-btn");
     editButtons.forEach(element => {
+        const index = element.id.split("-")[1];
+        console.log("index", index);
         element.addEventListener("click", (event) => {
             
     
@@ -125,13 +127,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             const editButton = event.target.closest('button'); // Target the clicked button element
             const moreContent = document.querySelector(".more-content");
-            const title = document.getElementById("Itemtitle-1");
+            const title = document.getElementById(`Itemtitle-${index}`);
             const editInput = document.querySelector(".editService");
-            const doneButton = document.getElementById("done-1");
+            const doneButton = document.getElementById(`done-${index}`);
             
 
             // Hide content, title and pencil when the pencil button is clicked
-            if (editButton.id === "edit-1") {
+            if (editButton.id === `edit-${index}`) {
                 moreContent.style.display = "none";  // Hide the content
                 title.style.display = "none";  // Hide the title
                 editButton.style.display = "none";  // Hide the pencil button
@@ -144,16 +146,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Event listener for the done button
-    const doneButton = document.getElementById("done-1");
+    const doneButton = document.getElementById(`done-${index}`);
     doneButton.addEventListener("click", (event) => {
+        
         //event.preventDefault();  // Prevent form submission
 
 
         // Show the content, title, and pencil button when done button is clicked
         const moreContent = document.querySelector(".more-content");
-        const title = document.getElementById("Itemtitle-1");
+        const title = document.getElementById(`Itemtitle-${index}`);
         const editInput = document.querySelector(".editService");
-        const editButton = document.getElementById("edit-1");
+        const editButton = document.getElementById(`edit-${index}`);
         
         moreContent.style.display = "block";  // Show the content again
         title.style.display = "block";  // Show the title again
