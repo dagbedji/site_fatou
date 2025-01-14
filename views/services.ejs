@@ -56,8 +56,8 @@
                         <a href="/addOffre" class="plus-linkd" >
                             <i class="fa-solid fa-plus"></i>
                         </a>
-                        <label for="title-1" class="form-label">Edit Title:</label>
-                        <input type="text" name="title" id="title-1" class="form-control titleid" value="<%= item.title %>" />
+                        <label for="title-<%= item.id %>" class="form-label">Edit Title:</label>
+                        <input type="text" name="title" id="title-<%= item.id %>" class="form-control titleid" value="<%= item.title %>" />
                     
                         <label for="description-1" class="form-label">Edit Description:</label>
                         <% item.contents.forEach((content, index) => { %>
@@ -115,59 +115,78 @@
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     const editButtons = document.querySelectorAll(".edit");
-    const toggleButton = document.querySelector(".toggle-btn");
+
     editButtons.forEach(element => {
+        
         const index = element.id.split("-")[1];
         console.log("index", index);
-        element.addEventListener("click", (event) => {
-            
-    
-              if (toggleButton) {
-                toggleButton.style.display = "none";
-            }
-            const editButton = event.target.closest('button'); // Target the clicked button element
-            const moreContent = document.querySelector(".more-content");
-            const title = document.getElementById(`Itemtitle-${index}`);
-            const editInput = document.querySelector(".editService");
-            const doneButton = document.getElementById(`done-${index}`);
-            
 
-            // Hide content, title and pencil when the pencil button is clicked
-            if (editButton.id === `edit-${index}`) {
-                moreContent.style.display = "none";  // Hide the content
-                title.style.display = "none";  // Hide the title
-                editButton.style.display = "none";  // Hide the pencil button
-                
-                // Show the editable input fields and the done button
-                editInput.style.display = "block"; // Show the input for editing
-                doneButton.removeAttribute("hidden"); // Show the done button
+
+
+
+        element.addEventListener("click", (event) => {
+            //find the parent service grid item
+            const serviceGridItem = element.closest(".service_grid1");
+              if (!serviceGridItem) {
+                console.error("Parent service gird item not found");
+                return;
             }
+            const moreContent = serviceGridItem.querySelector("more-content");
+            const title = serviceGridItem.querySelector(`#Itemtitle-${index}`);
+            const editInput = serviceGridItem.querySelector(".editService");
+            const doneButton = serviceGridItem.querySelector(`#done-${index}`);
+            const toggleButton = serviceGridItem.querySelector(".toggle-btn");
+
+
+            if(moreContent) moreContent.style.display ="none";
+            if(title) title.style.display ="none";
+            if(editInput) editInput.style.display ="block";
+            if(toggleButton) toggleButton.style.display ="none";
+
+            if(element) element.style.display ="none";
+            if(doneButton) doneButton.removeAttribute("hidden");
+            
         });
     });
 
-    // Event listener for the done button
-    const doneButton = document.getElementById(`done-${index}`);
-    doneButton.addEventListener("click", (event) => {
+     // Event listener for the done buttons
+     const doneButtons = document.querySelectorAll("button[type='submit']");
+    doneButtons.forEach(doneButton => {
         
-        //event.preventDefault();  // Prevent form submission
+        const index = doneButton.id.split("-")[1];
 
+        doneButton.addEventListener("click", (event) => {
+            console.log(`Done button clicked for index: ${index}`);
 
-        // Show the content, title, and pencil button when done button is clicked
-        const moreContent = document.querySelector(".more-content");
-        const title = document.getElementById(`Itemtitle-${index}`);
-        const editInput = document.querySelector(".editService");
-        const editButton = document.getElementById(`edit-${index}`);
-        
-        moreContent.style.display = "block";  // Show the content again
-        title.style.display = "block";  // Show the title again
-        editButton.style.display = "block";  // Show the pencil button again
-        
-        // Hide the editable input fields and the done button
-        editInput.style.display = "none";  // Hide the input form
-        doneButton.setAttribute("hidden", "true");  // Hide the done button again
+            // Find the parent service grid item for scoping
+            const serviceGridItem = doneButton.closest(".service_grid1");
+            if (!serviceGridItem) {
+                console.error("Parent service grid item not found");
+                return;
+            }
+
+            // Select elements within the scoped service grid item
+            const moreContent = serviceGridItem.querySelector(".more-content");
+            const title = serviceGridItem.querySelector(`#Itemtitle-${index}`);
+            const editInput = serviceGridItem.querySelector(".editService");
+            const editButton = serviceGridItem.querySelector(`#edit-${index}`);
+            const toggleButton = serviceGridItem.querySelector(".toggle-btn");
+
+            console.log("Scoped elements for done button:", { moreContent, title, editInput, editButton, toggleButton });
+
+            // Restore content, title, and pencil button visibility
+            if (moreContent) moreContent.style.display = "block";
+            if (title) title.style.display = "block";
+            if (editButton) editButton.style.display = "block";
+            if (toggleButton) toggleButton.style.display = "block";
+
+            // Hide the editable input fields and the done button
+            if (editInput) editInput.style.display = "none";
+            if (doneButton) doneButton.setAttribute("hidden", "true");
+            
+        });
     });
 });
-
 
 </script>
 

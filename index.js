@@ -118,9 +118,9 @@ app.get("/services", async (req, res) =>{
         ON 
             offre.id = moreContent.offre_id
         GROUP BY 
-            offre.id, offre.title, offre.image
+            offre.id, offre.title, offre.image ORDER BY id ASC
     `);
-    
+    console.log("result:", result)
     const offres = result.rows.map(row => ({
         ...row,
         contents: row.contents ? row.contents.split('. ') : [], // Split using the unique delimiter
